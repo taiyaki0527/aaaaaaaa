@@ -254,7 +254,7 @@ MonoBehaviour:
   speedManager: 1
   gravityPower: 0
   rb: {fileID: 219456776}
-  jumpPower: 1000
+  jumpPower: 1200
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
