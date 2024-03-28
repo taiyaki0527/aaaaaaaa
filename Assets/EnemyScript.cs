@@ -28,18 +28,24 @@ public class EnemyScript : MonoBehaviour
             transform.position += transform.forward * speed;
 
         } 
-        else if (dis <= 30 && dis>1)
+        else if (dis <= 30 && dis>10)
         {
             animator.SetBool("walk", false);
             animator.SetBool("Run", true);
             speed = 0.05f;
+            transform.position += transform.forward * speed;
 
         }
-        else if (dis <= 1)
+        else if (dis <= 2)
         {
             speed = 0;
 
-            animator.SetBool("Basic Attack", true);
+            animator.SetBool("Attack", true);
+            transform.position += transform.forward * speed;
+        }
+        else
+        {
+            speed = 0;
         }
        
     }
