@@ -21,36 +21,27 @@ public class EnemyScript : MonoBehaviour
     void Update()
     {
         dis = Vector3.Distance(target.transform.position, transform.position);
-        animator.SetBool("walk", true);
         transform.LookAt(target.transform);
-        if (dis < 50)
-        {
-            transform.position += transform.forward * speed;
-            if (dis < 30)
-            {
-                speed = 0.05f;
-
-            }
-        }
-            
-        if (dis <= 50)
+        if (dis <= 50 && dis>30)
         {
             animator.SetBool("walk", true);
+            transform.position += transform.forward * speed;
 
-        }
-        else
+        } 
+        else if (dis <= 30 && dis>1)
         {
             animator.SetBool("walk", false);
-        }
-        if (dis <= 30)
-        {
             animator.SetBool("Run", true);
+            speed = 0.05f;
 
         }
-        else
+        else if (dis <= 1)
         {
-            animator.SetBool("Run", false);
+            speed = 0;
+
+            animator.SetBool("Basic Attack", true);
         }
+       
     }
     private void OnCollisionEnter(Collision collision)
     {

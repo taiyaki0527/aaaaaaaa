@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+     
+
 
 public class PlayerScript : MonoBehaviour
 {
+    
+    int currentHp;
     Vector3 movingDirecion;
     public float speedManager;
     public float gravityPower;
@@ -12,11 +17,15 @@ public class PlayerScript : MonoBehaviour
     public float jumpPower;
     private bool jumpNow = true;
     public float HP=30;
+    int maxHp = 30;
+    public Slider slider;
     Animator animator;
     // Start is called before the first frame update
     void Start()
     {
-        
+        slider.value = 1;
+        currentHp = maxHp;
+        Debug.Log("Start currentHp : " + currentHp);
         rb = GetComponent<Rigidbody>();
     }
 
@@ -63,6 +72,10 @@ public class PlayerScript : MonoBehaviour
         {
             HP--;
             Debug.Log(HP);
+            currentHp--;
+            Debug.Log("After currentHp : " + currentHp);
+            slider.value = (float)currentHp / (float)maxHp; ;
+            Debug.Log("slider.value : " + slider.value);
         }
 
     }
