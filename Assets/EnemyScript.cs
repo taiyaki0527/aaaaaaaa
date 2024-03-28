@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour
 {
     float dis;
+    public static float enemyHP;
     private GameObject target;
     Animator animator;
    
@@ -12,6 +13,7 @@ public class EnemyScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        enemyHP = 50;
         speed = 0.025f;
         target = GameObject.Find("Player");
         animator = GetComponent<Animator>();
@@ -49,6 +51,10 @@ public class EnemyScript : MonoBehaviour
             animator.SetBool("Run",false);
             animator.SetBool("walk", false);
             speed = 0;
+        }
+        if (enemyHP <= 0)
+        {
+            animator.SetBool("die", true);
         }
        
     }
