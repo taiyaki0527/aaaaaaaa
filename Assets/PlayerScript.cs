@@ -45,7 +45,7 @@ public class PlayerScript : MonoBehaviour
     {
         Gravity(); 
         if (jumpNow == true) return;
-        rb.velocity = new Vector3(movingVelocity.x*30, 0, movingVelocity.z*30);
+        rb.velocity = new Vector3(movingVelocity.x*15, 0, movingVelocity.z*15);
         Vector3 differenceDis = new Vector3(transform.position.x, 0, transform.position.z) - new Vector3(latestPos.x, 0, latestPos.z);
         latestPos = transform.position;
         if (Mathf.Abs(differenceDis.x) > 0.001f || Mathf.Abs(differenceDis.z) > 0.001f)
