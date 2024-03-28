@@ -11,6 +11,8 @@ public class PlayerScript : MonoBehaviour
     private Vector3 movingVelocity;
     public float jumpPower;
     private bool jumpNow = true;
+    public float HP=30;
+    Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +45,7 @@ public class PlayerScript : MonoBehaviour
             Quaternion rot = Quaternion.LookRotation(differenceDis);
             rot = Quaternion.Slerp(rb.transform.rotation, rot, 0.2f);
             this.transform.rotation = rot;
+            animator.SetBool("WK_heavy_infantry_06_combat_walk", true);
         }
     }
     private void OnCollisionEnter(Collision other)
@@ -56,6 +59,12 @@ public class PlayerScript : MonoBehaviour
                 jumpNow = false;
             }
         }
+        if (other.gameObject.tag == ("Enemy"))
+        {
+            HP--;
+            Debug.Log(HP);
+        }
+
     }
     void jump()
     {
