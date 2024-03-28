@@ -22,24 +22,35 @@ public class EnemyScript : MonoBehaviour
     {
         dis = Vector3.Distance(target.transform.position, transform.position);
         transform.LookAt(target.transform);
+        
         if (dis <= 50 && dis>30)
         {
             animator.SetBool("walk", true);
+            speed = 0.025f;
             transform.position += transform.forward * speed;
 
         } 
-        else if (dis <= 30 && dis>1)
+        else if (dis <= 30 && dis>2f)
         {
             animator.SetBool("walk", false);
             animator.SetBool("Run", true);
             speed = 0.05f;
-
+            transform.position += transform.forward * speed;
         }
-        else if (dis <= 1)
+        else if (dis <= 2f)
         {
             speed = 0;
-
-            animator.SetBool("Basic Attack", true);
+            animator.SetBool("Run",false);
+            animator.SetBool("Attack", true);
+            
+        }
+        else
+        {
+            animator.SetBool("Run",false);
+            animator.SetBool("walk",false);
+            animator.SetBool("Attack",false);
+            
+            speed = 0f;
         }
        
     }
