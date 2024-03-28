@@ -13,7 +13,7 @@ public class EnemyScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemyHP = 50;
+        enemyHP = 1;
         speed = 0.025f;
         target = GameObject.Find("Player");
         animator = GetComponent<Animator>();

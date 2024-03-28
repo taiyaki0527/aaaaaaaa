@@ -750,6 +750,7 @@ GameObject:
   - component: {fileID: 219456777}
   - component: {fileID: 219456781}
   - component: {fileID: 219456776}
+  - component: {fileID: 219456782}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -869,6 +870,21 @@ MonoBehaviour:
   jumpPower: 15
   HP: 30
   slider: {fileID: 440773109}
+--- !u!114 &219456782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219456775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87e849f44e8ab82459501ee888895619, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firingPoint: {fileID: 219456775}
+  bullet: {fileID: 2165619104354397819, guid: cab8cd30d5c9f244c9ae92e4f25b969b, type: 3}
+  speed: 30
 --- !u!1001 &220730217
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2520,7 +2536,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 701040f062597d745a002fa26d7b8587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHP: 0
   speed: 0
 --- !u!65 &740772061
 BoxCollider:
