@@ -20,6 +20,7 @@ public class bulletscript : MonoBehaviour
         if (collision.gameObject.tag == ("Enemy"))
         {
             EnemyScript.enemyHP--;
+            Debug.Log("enemyHP"+EnemyScript.enemyHP);
         }
     }
 }

@@ -8,7 +8,7 @@ public class EnemyScript : MonoBehaviour
     public static float enemyHP;
     private GameObject target;
     Animator animator;
-   
+    bool isDeath = false;
     public float speed;
     // Start is called before the first frame update
     void Start()
@@ -52,9 +52,14 @@ public class EnemyScript : MonoBehaviour
             animator.SetBool("walk", false);
             speed = 0;
         }
-        if (enemyHP <= 0)
+        if (enemyHP <= 0 && isDeath== false)
         {
+            Debug.Log("d");
+            animator.SetBool("Attack", false);
+            animator.SetBool("Run", false);
+            animator.SetBool("walk", false);
             animator.SetBool("die", true);
+            isDeath = true;
         }
        
     }
