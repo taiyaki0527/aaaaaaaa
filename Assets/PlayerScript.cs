@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
      
 
 
@@ -19,7 +20,7 @@ public class PlayerScript : MonoBehaviour
     public float HP=30;
     int maxHp = 30;
     public Slider slider;
-    Animator animator;
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +28,7 @@ public class PlayerScript : MonoBehaviour
         currentHp = maxHp;
         Debug.Log("Start currentHp : " + currentHp);
         rb = GetComponent<Rigidbody>();
+       
     }
 
     // Update is called once per frame
@@ -39,7 +41,12 @@ public class PlayerScript : MonoBehaviour
         movingDirecion = new Vector3(x, 0, z);
         movingDirecion.Normalize();
         movingVelocity = movingDirecion * speedManager;
+        if (HP <= 0)
+        {
+            SceneManager.LoadScene("GameOver");
+        }
         
+      
     }
     Vector3 latestPos;
     private void FixedUpdate()
@@ -55,7 +62,7 @@ public class PlayerScript : MonoBehaviour
             Quaternion rot = Quaternion.LookRotation(differenceDis);
             rot = Quaternion.Slerp(rb.transform.rotation, rot, 0.2f);
             this.transform.rotation = rot;
-            animator.SetBool("WK_heavy_infantry_06_combat_walk", true);
+            
         }
     }
     private void OnCollisionEnter(Collision other)
@@ -71,12 +78,17 @@ public class PlayerScript : MonoBehaviour
         }
         if (other.gameObject.tag == ("Enemy"))
         {
-            HP--;
-            Debug.Log(HP);
-            currentHp--;
-            Debug.Log("After currentHp : " + currentHp);
-            slider.value = (float)currentHp / (float)maxHp; ;
-            Debug.Log("slider.value : " + slider.value);
+            if (EnemyScript.enemyHP > 0)
+            {
+
+
+                HP--;
+                Debug.Log(HP);
+                currentHp--;
+                Debug.Log("After currentHp : " + currentHp);
+                slider.value = (float)currentHp / (float)maxHp; ;
+                Debug.Log("slider.value : " + slider.value);
+            }
         }
 
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyScript : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class EnemyScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemyHP = 1;
+        enemyHP = 100;
         speed = 0.025f;
         target = GameObject.Find("Player");
         animator = GetComponent<Animator>();
@@ -23,8 +24,17 @@ public class EnemyScript : MonoBehaviour
     void Update()
     {
         dis = Vector3.Distance(target.transform.position, transform.position);
-        transform.LookAt(target.transform);
-        if (dis <= 50 && dis>30)
+        if (enemyHP > 0)
+        {
+            transform.LookAt(target.transform);
+        }
+        
+        if (enemyHP <= 0)
+        {
+            speed = 0;
+           
+        }
+        else if (dis <= 50 && dis>30)
         {
             animator.SetBool("walk", true);
             transform.position += transform.forward * speed;
@@ -40,17 +50,17 @@ public class EnemyScript : MonoBehaviour
         }
         else if (dis <= 10)
         {
-            speed = 0;
+            speed = -0.05f;
 
             animator.SetBool("Attack", true);
-           
+            speed = -0.05f;
         }
         else
         {
             animator.SetBool("Attack", false);
             animator.SetBool("Run",false);
             animator.SetBool("walk", false);
-            speed = 0;
+            speed = 0f;
         }
         if (enemyHP <= 0 && isDeath== false)
         {
@@ -58,10 +68,21 @@ public class EnemyScript : MonoBehaviour
             animator.SetBool("Attack", false);
             animator.SetBool("Run", false);
             animator.SetBool("walk", false);
-            animator.SetBool("die", true);
+            animator.SetTrigger("Death");
             isDeath = true;
+            speed = 0;
+            StartCoroutine(DelayCoroutine());
         }
        
+    }
+    private IEnumerator DelayCoroutine()
+    {
+       
+
+        // 3•bŠÔ‘Ò‚Â
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene("Clear");
+
     }
     private void OnCollisionEnter(Collision collision)
     {
